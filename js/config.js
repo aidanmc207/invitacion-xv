@@ -5,13 +5,14 @@
  * ============================================================
  */
 window.INVITACION = {
-  // Nombre de la quinceañera
-  nombre: "Nombre",
+  // Nombre corto (portada grande, sobre y despedida) y nombre completo (debajo, en la portada)
+  nombre: "Evangelyn",
+  nombreCompleto: "Evangelyn Yariana Blanco Rodríguez",
 
   // Fecha y hora del evento principal (formato AAAA-MM-DDTHH:MM:SS, hora local)
-  fecha: "2027-03-20T19:00:00",
-  fechaTexto: "Sábado 20 de marzo de 2027",
-  duracionHoras: 6,
+  fecha: "2027-01-16T15:00:00",
+  fechaTexto: "Sábado 16 de enero de 2027",
+  duracionHoras: 7,
   zonaHoraria: "America/Costa_Rica",
 
   // Paleta de colores: olivo | rural | romantico | gala | encantado | tropical | minimal | verano
@@ -25,24 +26,24 @@ window.INVITACION = {
   padrinos: ["Nombre del padrino", "Nombre de la madrina"],
 
   ceremonia: {
-    titulo: "Ceremonia religiosa",
-    hora: "5:00 p.m.",
-    lugar: "Parroquia Nombre del Lugar",
-    direccion: "Dirección de la parroquia",
-    mapa: "https://maps.google.com/?q=Parroquia",
+    titulo: "Misa",
+    hora: "3:00 p.m.",
+    lugar: "Granja La Loma",
+    direccion: "Aguas Zarcas, San Carlos",
+    mapa: "https://www.google.com/maps/search/?api=1&query=Granja+La+Loma+Aguas+Zarcas",
   },
 
   recepcion: {
     titulo: "Recepción",
-    hora: "7:00 p.m.",
-    lugar: "Salón de Eventos Nombre",
-    direccion: "Dirección del salón",
-    mapa: "https://maps.google.com/?q=Salon+de+eventos",
+    hora: "5:00 p.m.",
+    lugar: "Granja La Loma",
+    direccion: "Aguas Zarcas, San Carlos",
+    mapa: "https://www.google.com/maps/search/?api=1&query=Granja+La+Loma+Aguas+Zarcas",
   },
 
   vestimenta: {
-    tipo: "Formal",
-    nota: "Con cariño te pedimos reservar el color rosa para la quinceañera.",
+    tipo: "Libre",
+    nota: "Ven a tu gusto, como te sientas más cómodo. Con cariño te pedimos reservar el color verde olivo para la cumpleañera.",
   },
 
   regalos: {
@@ -51,7 +52,7 @@ window.INVITACION = {
   },
 
   rsvp: {
-    fechaLimite: "1 de marzo de 2027",
+    fechaLimite: "2 de enero de 2027",
     // Máximo de personas por confirmación (si el enlace no trae ?pases=N)
     maxPersonas: 6,
     // Pega aquí la URL de tu aplicación web de Google Apps Script (ver README).
