@@ -13,7 +13,11 @@
   var pases = parseInt(params.get("pases"), 10);
   var maxPersonas = pases > 0 ? Math.min(pases, 20) : C.rsvp.maxPersonas;
 
-  document.documentElement.dataset.theme = params.get("tema") || C.tema;
+  var tema = params.get("tema") || C.tema;
+  document.documentElement.dataset.theme = tema;
+  if (tema === "olivo" || tema === "rural") {
+    $$('use[href="#rama"]').forEach(function (u) { u.setAttribute("href", "#rama-olivo"); });
+  }
   document.title = "Mis XV Años · " + C.nombre;
 
   // ---------- Textos desde config.js ----------

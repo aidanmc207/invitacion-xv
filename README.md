@@ -72,11 +72,13 @@ Todo en `js/config.js`:
 
 | Valor | Estilo |
 |---|---|
-| `romantico` | Rosa palo, marfil, oro rosa y eucalipto **(predeterminada)** |
+| `olivo` | Verde olivo predominante con detalles rosados en oro rosa **(predeterminada)** |
+| `rural` | Campestre: verde olivo, lino, sobre kraft con cordel, costuras y flores silvestres rosadas |
+| `romantico` | Rosa palo, marfil, oro rosa y eucalipto |
 | `gala` | Azul marino, lavanda, dorado y blanco |
 | `encantado` | Verde salvia, blush, champán y beige |
 | `tropical` | Coral, durazno, menta y blanco cálido |
 | `minimal` | Malva, ciruela, plata y blanco nieve |
 | `verano` | Azul cielo, rosa bebé, amarillo manteca y plata |
 
-Para comparar sin editar nada, agrega `?tema=gala` (u otro) al final del enlace.
+Para comparar sin editar nada, agrega `?tema=rural` (u otro) al final del enlace.

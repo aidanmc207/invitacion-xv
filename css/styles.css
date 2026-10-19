@@ -1,7 +1,53 @@
 /* ============================================================
    PALETAS (cambia en js/config.js -> tema)
    ============================================================ */
-:root,
+:root {
+  --sobre: var(--primary);
+  --petalo: var(--primary);
+  --f-label: "Montserrat", sans-serif;
+}
+[data-theme="olivo"] {
+  /* Verde olivo predominante · detalles rosados en oro rosa */
+  --bg: #F9F7F0;
+  --surface: #FFFFFF;
+  --suave: #EDEFE1;
+  --text: #3E4530;
+  --muted: #747C5C;
+  --primary: #E3B5B3;
+  --accent: #6B7A3A;
+  --aceituna: #4A5427;
+  --btn: #5C6B2E;
+  --on-btn: #FFFFFF;
+  --metal-1: #B76E79;
+  --metal-2: #E9C2B5;
+  --metal-3: #C48A7E;
+  --linea: #DCDFC9;
+  --sobre: #7D8B4A;
+  --petalo: #E3B5B3;
+}
+[data-theme="rural"] {
+  /* Campestre: verde olivo, lino, kraft y flores silvestres rosadas */
+  --bg: #F1EADB;
+  --surface: #FBF7EE;
+  --suave: #E7DEC9;
+  --text: #3A3C27;
+  --muted: #6D6A4E;
+  --primary: #D9A3A0;
+  --accent: #5E6B34;
+  --aceituna: #3F4720;
+  --flor: #E2A9A8;
+  --flor-centro: #E9C46A;
+  --btn: #5E6B34;
+  --on-btn: #FFFFFF;
+  --metal-1: #4F5A2A;
+  --metal-2: #9AA35A;
+  --metal-3: #6E7A3A;
+  --linea: #CFC3A6;
+  --sobre: #C4A57C;
+  --petalo: #D9A3A0;
+  --f-label: "Amatic SC", "Montserrat", sans-serif;
+}
+
 [data-theme="romantico"] {
   /* Rosa palo · Marfil · Oro rosa · Eucalipto */
   --bg: #FBF7F2;
@@ -131,7 +177,7 @@ h1, h2, h3, p { margin: 0; }
 @keyframes brillo { to { background-position: 200% center; } }
 
 .etiqueta {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--f-label);
   font-size: .72rem;
   font-weight: 500;
   letter-spacing: .32em;
@@ -178,7 +224,7 @@ h1, h2, h3, p { margin: 0; }
 .sobre:hover { transform: translateY(-4px); }
 .sobre:focus-visible { outline: 2px solid var(--btn); outline-offset: 8px; }
 .sobre > span { position: absolute; inset: 0; display: block; }
-.sobre__fondo { background: var(--primary); border-radius: 6px; filter: brightness(.88); }
+.sobre__fondo { background: var(--sobre); border-radius: 6px; filter: brightness(.88); }
 .sobre__carta {
   inset: 6% 5% 4% !important;
   background: var(--surface); border-radius: 4px;
@@ -187,14 +233,14 @@ h1, h2, h3, p { margin: 0; }
   transition: transform .9s cubic-bezier(.3,.7,.3,1) .45s;
   z-index: 1;
 }
-.carta__xv { font-family: "Montserrat", sans-serif; letter-spacing: .4em; font-size: .7rem; color: var(--muted); }
+.carta__xv { font-family: var(--f-label); letter-spacing: .4em; font-size: .7rem; color: var(--muted); }
 .carta__nombre { font-family: "Great Vibes", cursive; font-size: 2.2rem; color: var(--btn); }
 .sobre__frente {
-  background: var(--primary); border-radius: 0 0 6px 6px; z-index: 2;
+  background: var(--sobre); border-radius: 0 0 6px 6px; z-index: 2;
   clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%);
 }
 .sobre__solapa {
-  background: var(--primary); filter: brightness(1.06); z-index: 3;
+  background: var(--sobre); filter: brightness(1.06); z-index: 3;
   clip-path: polygon(0 0, 100% 0, 50% 58%);
   transform-origin: top center;
   transition: transform .6s ease, z-index 0s .3s;
@@ -218,7 +264,7 @@ h1, h2, h3, p { margin: 0; }
 .petalos { position: fixed; inset: 0; pointer-events: none; z-index: 40; overflow: hidden; }
 .petalo {
   position: absolute; top: -20px; width: 12px; height: 12px;
-  background: var(--primary); opacity: .55;
+  background: var(--petalo); opacity: .55;
   border-radius: 150% 0 150% 0;
   animation: caer linear infinite;
 }
@@ -265,7 +311,7 @@ main { max-width: 760px; margin: 0 auto; }
   padding: .9rem 0 .7rem; display: flex; flex-direction: column;
 }
 .cuenta strong { font-size: clamp(1.8rem, 7vw, 2.4rem); font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums lining-nums; }
-.cuenta span { font-family: "Montserrat", sans-serif; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-top: .35rem; }
+.cuenta span { font-family: var(--f-label); font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-top: .35rem; }
 .cuenta__fin { font-style: italic; font-size: 1.4rem; }
 
 /* Frase y familia */
@@ -280,7 +326,7 @@ main { max-width: 760px; margin: 0 auto; }
   padding: 2rem 1.2rem; display: flex; flex-direction: column; align-items: center; gap: .4rem;
 }
 .tarjeta svg { width: 38px; height: 38px; color: var(--accent); margin-bottom: .4rem; }
-.tarjeta h3 { font-family: "Montserrat", sans-serif; font-size: .8rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; }
+.tarjeta h3 { font-family: var(--f-label); font-size: .8rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; }
 .tarjeta__hora { font-size: 1.9rem; font-weight: 500; }
 .tarjeta__lugar { font-weight: 600; }
 .tarjeta__dir { color: var(--muted); font-size: 1.05rem; margin-bottom: .8rem; }
@@ -299,7 +345,7 @@ main { max-width: 760px; margin: 0 auto; }
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
   min-height: 48px; padding: .8rem 1.8rem; border-radius: 999px;
   border: 1.5px solid var(--btn); background: var(--btn); color: var(--on-btn);
-  font-family: "Montserrat", sans-serif; font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  font-family: var(--f-label); font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
   text-decoration: none; cursor: pointer; transition: transform .2s ease, opacity .2s ease;
 }
 .boton:hover { transform: translateY(-2px); }
@@ -387,4 +433,46 @@ main { max-width: 760px; margin: 0 auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .revelar { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
+}
+
+/* ============================================================
+   DETALLES DEL TEMA RURAL (campestre)
+   ============================================================ */
+[data-theme="rural"] body,
+[data-theme="rural"] .intro {
+  background-color: var(--bg);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(110, 95, 60, .045) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(110, 95, 60, .04) 0 1px, transparent 1px 5px);
+}
+/* Costuras */
+[data-theme="rural"] .seccion--suave,
+[data-theme="rural"] .tarjeta,
+[data-theme="rural"] .formulario,
+[data-theme="rural"] .exito,
+[data-theme="rural"] .cuenta div {
+  outline: 1.5px dashed var(--linea);
+  outline-offset: -8px;
+}
+[data-theme="rural"] .seccion--suave { outline-color: #BFAE87; }
+[data-theme="rural"] .cuenta div { outline-offset: -5px; }
+/* Tipografía campestre */
+[data-theme="rural"] .etiqueta { font-size: 1.2rem; font-weight: 700; letter-spacing: .18em; }
+[data-theme="rural"] .boton { font-size: 1.2rem; font-weight: 700; letter-spacing: .1em; }
+[data-theme="rural"] .tarjeta h3 { font-size: 1.45rem; font-weight: 700; letter-spacing: .12em; }
+[data-theme="rural"] .cuenta span { font-size: 1rem; font-weight: 700; letter-spacing: .12em; }
+[data-theme="rural"] .carta__xv { font-size: 1.05rem; font-weight: 700; }
+[data-theme="rural"] .intro__ayuda { font-family: var(--f-label); font-size: 1.25rem; font-weight: 700; }
+/* Sobre kraft con cordel y sello de cera rosado */
+[data-theme="rural"] .sobre__fondo { filter: brightness(.86); }
+[data-theme="rural"] .sobre::after {
+  content: ""; position: absolute; left: -2%; right: -2%; top: 58%; height: 5px; margin-top: -2px; z-index: 3;
+  background: repeating-linear-gradient(115deg, #A88757 0 3px, #E2CDA4 3px 6px);
+  border-radius: 3px; box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  transition: opacity .3s ease;
+}
+[data-theme="rural"] .sobre.abierto::after { opacity: 0; }
+[data-theme="rural"] .sobre__sello {
+  background: radial-gradient(circle at 35% 30%, #EBC0BC, #B9716C 72%);
+  border-radius: 46% 54% 50% 50% / 52% 48% 52% 48%;
 }

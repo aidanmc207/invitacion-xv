@@ -14,9 +14,9 @@ window.INVITACION = {
   duracionHoras: 6,
   zonaHoraria: "America/Costa_Rica",
 
-  // Paleta de colores: romantico | gala | encantado | tropical | minimal | verano
-  // (Para previsualizar otra sin editar: agrega ?tema=gala al final del enlace)
-  tema: "romantico",
+  // Paleta de colores: olivo | rural | romantico | gala | encantado | tropical | minimal | verano
+  // (Para previsualizar otra sin editar: agrega ?tema=rural al final del enlace)
+  tema: "olivo",
 
   frase:
     "Hay momentos que se esperan toda la vida. Hoy dejo atrás mi niñez para comenzar a escribir una nueva historia, y quiero que seas parte de ella.",
