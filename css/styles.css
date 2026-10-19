@@ -22,7 +22,9 @@
   --metal-2: #E9C2B5;
   --metal-3: #C48A7E;
   --linea: #DCDFC9;
-  --sobre: #7D8B4A;
+  --sobre: #A2AD72;
+  --sello-1: #F4E6B8;
+  --sello-2: #A9873C;
   --petalo: #E3B5B3;
 }
 [data-theme="rural"] {
@@ -250,7 +252,7 @@ h1, h2, h3, p { margin: 0; }
   width: 62px; height: 62px; margin: -31px 0 0 -31px; border-radius: 50%; z-index: 4;
   display: grid !important; place-items: center;
   font-family: "Great Vibes", cursive; font-size: 1.7rem; color: #fff;
-  background: radial-gradient(circle at 35% 30%, var(--metal-2), var(--metal-1) 70%);
+  background: radial-gradient(circle at 35% 30%, var(--sello-1, var(--metal-2)), var(--sello-2, var(--metal-1)) 70%);
   box-shadow: 0 3px 8px rgba(0,0,0,.25), inset 0 0 0 3px rgba(255,255,255,.25);
   transition: opacity .3s ease, transform .3s ease;
 }
