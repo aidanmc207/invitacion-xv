@@ -323,7 +323,7 @@ main { max-width: 760px; margin: 0 auto; }
 
 /* Frase y familia */
 .frase { margin: 0; max-width: 34ch; font-size: 1.45rem; font-style: italic; line-height: 1.5; }
-.familia { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; width: 100%; }
+.familia { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem 3rem; margin-top: 2rem; width: 100%; }
 .lista-nombres { list-style: none; padding: 0; margin: .3rem 0 0; }
 
 /* Tarjetas de evento */
@@ -434,7 +434,7 @@ main { max-width: 760px; margin: 0 auto; }
   .formulario, .exito { padding: 2.2rem 2rem; }
 }
 @media (max-width: 380px) {
-  .familia { grid-template-columns: 1fr; }
+  .familia { flex-direction: column; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
