@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es" data-theme="romantico">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Generador de enlaces</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/config.js"></script>
+  <style>
+    body { text-align: left; }
+    .gen { max-width: 760px; margin: 0 auto; padding: 3rem 16px; display: flex; flex-direction: column; gap: 1.2rem; }
+    .gen h1 { text-align: center; }
+    .gen textarea { min-height: 180px; font-family: "Montserrat", sans-serif; font-size: .95rem; }
+    .gen .campo input, .gen .campo textarea { background: var(--surface); }
+    .fila { background: var(--surface); border: 1px solid var(--linea); border-radius: 16px; padding: 1rem; display: flex; flex-direction: column; gap: .6rem; }
+    .fila code { font-size: .8rem; word-break: break-all; color: var(--muted); }
+    .acciones { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .acciones .boton { min-height: 40px; padding: .5rem 1rem; font-size: .7rem; }
+  </style>
+</head>
+<body>
+  <div class="gen">
+    <h1 class="titulo-script metal">Enlaces personalizados</h1>
+    <p>Escribe un invitado por línea con el formato <strong>Nombre, pases</strong>. Cada enlace saluda al invitado por su nombre y limita cuántas personas puede confirmar.</p>
+    <div class="campo">
+      <label for="lista">Invitados</label>
+      <textarea id="lista">Familia Pérez, 4
+Ana Rodríguez, 1
+Familia Mora Solís, 5</textarea>
+    </div>
+    <div class="campo">
+      <label for="base">Dirección de la invitación</label>
+      <input id="base" type="url">
+    </div>
+    <button class="boton" id="generar" type="button">Generar enlaces</button>
+    <div id="salida" style="display:flex;flex-direction:column;gap:.8rem"></div>
+  </div>
+  <script>
+    (function () {
+      var base = document.getElementById("base");
+      base.value = location.href.replace(/generador\.html.*$/, "");
+      document.getElementById("generar").addEventListener("click", function () {
+        var salida = document.getElementById("salida");
+        salida.innerHTML = "";
+        document.getElementById("lista").value.split("\n").forEach(function (linea) {
+          var partes = linea.split(",");
+          var nombre = partes[0].trim();
+          if (!nombre) return;
+          var pases = parseInt(partes[1], 10) || 1;
+          var url = base.value.trim() + "?invitado=" + encodeURIComponent(nombre) + "&pases=" + pases;
+          var texto = "¡Hola " + nombre + "! Con mucho cariño te invito a celebrar mis XV años. Abre tu invitación aquí: " + url;
+          var fila = document.createElement("div");
+          fila.className = "fila";
+          fila.innerHTML = "<strong></strong><code></code><div class='acciones'>" +
+            "<button class='boton boton--borde' type='button'>Copiar enlace</button>" +
+            "<a class='boton' target='_blank' rel='noopener'>Enviar por WhatsApp</a></div>";
+          fila.querySelector("strong").textContent = nombre + " · " + pases + (pases === 1 ? " pase" : " pases");
+          fila.querySelector("code").textContent = url;
+          fila.querySelector("a").href = "https://wa.me/?text=" + encodeURIComponent(texto);
+          var copiar = fila.querySelector("button");
+          copiar.addEventListener("click", function () {
+            navigator.clipboard.writeText(url).then(function () { copiar.textContent = "¡Copiado!"; });
+          });
+          salida.appendChild(fila);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

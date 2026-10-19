@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="es" data-theme="romantico">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mis XV Años</title>
+  <meta name="description" content="Estás invitado a celebrar mis XV años. Abre tu invitación y confirma tu asistencia.">
+  <meta property="og:title" content="Mis XV Años · Invitación">
+  <meta property="og:description" content="Abre tu invitación y confirma tu asistencia.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#FBF7F2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/config.js"></script>
+</head>
+<body class="bloqueado">
+
+  <!-- Símbolos SVG reutilizables -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="rama" viewBox="0 0 220 70">
+      <path d="M6 40 C60 30 140 30 214 38" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <g fill="currentColor">
+        <circle cx="28" cy="27" r="9" opacity=".75"/>
+        <circle cx="50" cy="45" r="9" opacity=".9"/>
+        <circle cx="75" cy="23" r="10" opacity=".85"/>
+        <circle cx="100" cy="44" r="10" opacity=".7"/>
+        <circle cx="125" cy="22" r="10" opacity=".9"/>
+        <circle cx="150" cy="43" r="9" opacity=".8"/>
+        <circle cx="172" cy="26" r="8" opacity=".7"/>
+        <circle cx="192" cy="43" r="7" opacity=".9"/>
+        <circle cx="212" cy="37" r="5" opacity=".8"/>
+      </g>
+    </symbol>
+    <symbol id="i-iglesia" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" d="M12 2v4M10 4h4M12 6l-5 5v10h10V11zM4 21h16M10 21v-4a2 2 0 0 1 4 0v4"/></symbol>
+    <symbol id="i-copa" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M7 3h10l-1 7a4 4 0 0 1-8 0zM12 14v6M8 21h8M7.5 7h9"/></symbol>
+  </svg>
+
+  <!-- Sobre de apertura -->
+  <div class="intro" id="intro">
+    <p class="intro__para" data-invitado hidden>Para: <span data-invitado-nombre></span></p>
+    <button class="sobre" id="abrir" type="button" aria-label="Abrir invitación">
+      <span class="sobre__fondo"></span>
+      <span class="sobre__carta">
+        <span class="carta__xv">XV</span>
+        <span class="carta__nombre" data-campo="nombre">Nombre</span>
+      </span>
+      <span class="sobre__frente"></span>
+      <span class="sobre__solapa"></span>
+      <span class="sobre__sello">XV</span>
+    </button>
+    <p class="intro__ayuda">Toca el sobre para abrir tu invitación</p>
+  </div>
+
+  <div class="petalos" id="petalos" aria-hidden="true"></div>
+
+  <main id="contenido">
+
+    <!-- Portada -->
+    <section class="portada">
+      <svg class="rama rama--sup" aria-hidden="true"><use href="#rama"/></svg>
+      <p class="etiqueta revelar">Mis XV Años</p>
+      <h1 class="nombre metal revelar" data-campo="nombre">Nombre</h1>
+      <p class="portada__fecha revelar" data-campo="fechaTexto"></p>
+      <p class="portada__saludo revelar" data-invitado hidden>
+        <span data-invitado-nombre></span>, tenemos el honor de invitarte a celebrar este día tan especial.
+      </p>
+      <svg class="rama rama--inf" aria-hidden="true"><use href="#rama"/></svg>
+      <a class="bajar" href="#cuenta" aria-label="Ver más">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- Cuenta regresiva -->
+    <section class="seccion" id="cuenta">
+      <p class="etiqueta revelar">Faltan</p>
+      <div class="cuenta revelar" id="cuenta-regresiva" aria-live="polite">
+        <div><strong data-u="dias">0</strong><span>días</span></div>
+        <div><strong data-u="horas">0</strong><span>horas</span></div>
+        <div><strong data-u="min">0</strong><span>min</span></div>
+        <div><strong data-u="seg">0</strong><span>seg</span></div>
+      </div>
+      <p class="cuenta__fin" id="cuenta-fin" hidden></p>
+      <a class="boton boton--borde revelar" id="calendario" target="_blank" rel="noopener">Agregar a mi calendario</a>
+    </section>
+
+    <!-- Mensaje -->
+    <section class="seccion seccion--suave">
+      <svg class="rama rama--peq" aria-hidden="true"><use href="#rama"/></svg>
+      <blockquote class="frase revelar" data-campo="frase"></blockquote>
+      <div class="familia">
+        <div class="revelar">
+          <h2 class="titulo-script metal">Mis padres</h2>
+          <ul class="lista-nombres" data-lista="padres"></ul>
+        </div>
+        <div class="revelar">
+          <h2 class="titulo-script metal">Mis padrinos</h2>
+          <ul class="lista-nombres" data-lista="padrinos"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Evento -->
+    <section class="seccion">
+      <p class="etiqueta revelar">Dónde y cuándo</p>
+      <h2 class="titulo-script metal revelar">El gran día</h2>
+      <div class="tarjetas" id="eventos"></div>
+    </section>
+
+    <!-- Vestimenta y regalos -->
+    <section class="seccion seccion--suave">
+      <div class="dos-col">
+        <div class="revelar">
+          <p class="etiqueta">Código de vestimenta</p>
+          <h2 class="titulo-script metal" data-campo="vestimenta.tipo">Formal</h2>
+          <p data-campo="vestimenta.nota"></p>
+          <div class="muestras" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+        <div class="revelar">
+          <p class="etiqueta">Regalos</p>
+          <h2 class="titulo-script metal">Un detalle</h2>
+          <p data-campo="regalos.texto"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Confirmación -->
+    <section class="seccion" id="rsvp">
+      <p class="etiqueta revelar">Confirma tu asistencia</p>
+      <h2 class="titulo-script metal revelar">¿Me acompañas?</h2>
+      <p class="revelar">Por favor confirma antes del <strong data-campo="rsvp.fechaLimite"></strong>.</p>
+      <p class="pases revelar" data-invitado hidden>
+        Invitación para <strong data-invitado-nombre></strong> · <span id="pases-texto"></span>
+      </p>
+
+      <div class="aviso" id="ya-respondio" hidden>
+        Ya enviaste una confirmación desde este dispositivo.
+        <button type="button" class="enlace" id="enviar-otra">Enviar otra respuesta</button>
+      </div>
+
+      <form class="formulario revelar" id="form-rsvp" novalidate>
+        <fieldset class="opciones">
+          <legend>¿Asistirás?</legend>
+          <label class="opcion"><input type="radio" name="asistencia" value="si" checked><span>¡Sí, ahí estaré!</span></label>
+          <label class="opcion"><input type="radio" name="asistencia" value="no"><span>No podré asistir</span></label>
+        </fieldset>
+
+        <div class="campo" id="campo-cantidad">
+          <label for="cantidad">Cantidad de personas</label>
+          <select id="cantidad" name="cantidad"></select>
+        </div>
+
+        <div id="nombres"></div>
+
+        <div class="campo">
+          <label for="telefono">Teléfono <small>(opcional)</small></label>
+          <input id="telefono" name="telefono" type="tel" autocomplete="tel" maxlength="30">
+        </div>
+
+        <div class="campo">
+          <label for="mensaje">Mensaje para la quinceañera <small>(opcional)</small></label>
+          <textarea id="mensaje" name="mensaje" rows="3" maxlength="500"></textarea>
+        </div>
+
+        <!-- Campo trampa para bots: no lo llenan las personas -->
+        <div class="trampa" aria-hidden="true">
+          <label>Sitio web <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+
+        <p class="error" id="error" role="alert" hidden></p>
+        <button class="boton" type="submit" id="enviar">Enviar confirmación</button>
+      </form>
+
+      <div class="exito" id="exito" hidden tabindex="-1">
+        <h3 class="titulo-script metal" id="exito-titulo">¡Gracias!</h3>
+        <p id="exito-texto"></p>
+        <ul class="lista-nombres" id="exito-lista"></ul>
+        <p class="nota" id="exito-demo" hidden>Modo demostración: la respuesta no se guardó porque aún no se configuró <code>urlGoogleScript</code>.</p>
+      </div>
+    </section>
+
+    <footer class="pie">
+      <svg class="rama rama--peq" aria-hidden="true"><use href="#rama"/></svg>
+      <p class="titulo-script metal">¡Te espero!</p>
+      <p class="etiqueta" data-campo="nombre">Nombre</p>
+    </footer>
+  </main>
+
+  <button class="musica" id="musica" type="button" aria-label="Pausar música" hidden>
+    <span></span><span></span><span></span>
+  </button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
