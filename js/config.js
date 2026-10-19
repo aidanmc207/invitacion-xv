@@ -22,8 +22,8 @@ window.INVITACION = {
   frase:
     "Hay momentos que se esperan toda la vida. Hoy dejo atrás mi niñez para comenzar a escribir una nueva historia, y quiero que seas parte de ella.",
 
-  padres: ["Nombre del papá", "Nombre de la mamá"],
-  padrinos: ["Nombre del padrino", "Nombre de la madrina"],
+  padres: ["Uarner Blanco Morales", "Ana Yancy Rodríguez Salazar"],
+ 
 
   ceremonia: {
     titulo: "Misa",
