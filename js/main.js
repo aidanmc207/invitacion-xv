@@ -93,6 +93,86 @@
     }, reducirMovimiento ? 0 : 1500);
   });
 
+  // ---------- Ramas colgantes con lucecitas ----------
+  function crearEnredadera(cont) {
+    var cantidad = parseInt(cont.dataset.vinas, 10) || 12;
+    var alto = cont.clientHeight || 400;
+    var ancho = cont.clientWidth || 400;
+    // En pantallas angostas se reducen para que no se amontonen
+    if (ancho < 600) cantidad = Math.round(cantidad * 0.75);
+    var html = "";
+    for (var i = 0; i < cantidad; i++) {
+      var x = (i + 0.5) / cantidad + (Math.random() - 0.5) * (0.5 / cantidad);
+      var borde = Math.min(1, Math.abs(x - 0.5) * 2); // 0 = centro, 1 = orillas
+      var L = Math.round(alto * (0.12 + 0.82 * Math.pow(borde, 1.7)) * (0.75 + Math.random() * 0.3));
+      html += vina(L, x);
+    }
+    cont.innerHTML = follaje(ancho) + html;
+    if (!reducirMovimiento) luciernagas(cont, ancho < 600 ? 8 : 12);
+  }
+
+  // Franja de follaje en la parte superior, de donde cuelgan las ramas
+  function follaje(ancho) {
+    var h = 34, hojas = "";
+    for (var i = 0, n = Math.round(ancho / 4); i < n; i++) {
+      var x = (Math.random() * ancho).toFixed(1);
+      var y = (Math.pow(Math.random(), 1.8) * h).toFixed(1);
+      var esc = 1 - y / h * 0.4;
+      hojas += '<ellipse class="h' + (1 + Math.floor(Math.random() * 3)) + '" cx="' + x + '" cy="' + y +
+        '" rx="' + (3.4 * esc).toFixed(1) + '" ry="' + (8 * esc).toFixed(1) +
+        '" transform="rotate(' + Math.round(Math.random() * 180 - 90) + " " + x + " " + y + ')"/>';
+    }
+    return '<svg class="follaje" width="100%" height="' + (h + 8) + '" viewBox="0 0 ' + ancho + " " + (h + 8) +
+      '" preserveAspectRatio="none">' + hojas + "</svg>";
+  }
+
+  function vina(L, x) {
+    var w = 44, cx = w / 2;
+    var amp = 2 + Math.random() * 4, fase = Math.random() * 6;
+    function px(y) { return cx + Math.sin(y / 36 + fase) * amp * (y / L); }
+    var d = "M" + cx + " 0";
+    for (var y = 6; y <= L; y += 6) d += " L" + px(y).toFixed(1) + " " + y;
+    var hojas = "", luces = "";
+    var paso = 7 + Math.random() * 3, lado = Math.random() < 0.5 ? 1 : -1;
+    for (y = 6; y < L - 4; y += paso) {
+      var esc = 1.2 - (y / L) * 0.55;
+      var lx = px(y);
+      var ang = 30 + Math.random() * 25;
+      var hx = (lx + lado * 4.5 * esc).toFixed(1), hy = (y + 3 * esc).toFixed(1);
+      hojas += '<ellipse class="h' + (1 + Math.floor(Math.random() * 3)) + '" cx="' + hx + '" cy="' + hy +
+        '" rx="' + (2.6 * esc).toFixed(1) + '" ry="' + (6.2 * esc).toFixed(1) +
+        '" transform="rotate(' + (-lado * ang).toFixed(0) + " " + hx + " " + hy + ')"/>';
+      if (Math.random() < 0.22) {
+        var r = 1.2 + Math.random() * 1.1, ly = (y + 1).toFixed(1), lcx = (lx - lado * 3).toFixed(1);
+        luces += '<g class="luz" style="animation-delay:' + (-Math.random() * 4).toFixed(1) + 's">' +
+          '<circle class="halo" cx="' + lcx + '" cy="' + ly + '" r="' + (r * 3.2).toFixed(1) + '"/>' +
+          '<circle cx="' + lcx + '" cy="' + ly + '" r="' + r.toFixed(1) + '"/></g>';
+      }
+      lado = -lado;
+    }
+    hojas += '<ellipse class="h2" cx="' + px(L).toFixed(1) + '" cy="' + (L - 3) + '" rx="2" ry="4.5"/>';
+    return '<div class="vina" style="left:' + (x * 100).toFixed(1) + "%;height:" + L +
+      "px;animation-duration:" + (5 + Math.random() * 4).toFixed(1) + "s;animation-delay:" + (-Math.random() * 6).toFixed(1) + 's">' +
+      '<svg width="' + w + '" height="' + L + '" viewBox="0 0 ' + w + " " + L + '">' +
+      '<path class="tallo" d="' + d + '"/>' + hojas + luces + "</svg></div>";
+  }
+
+  function luciernagas(cont, n) {
+    var padre = cont.parentNode;
+    for (var i = 0; i < n; i++) {
+      var s = document.createElement("span");
+      s.className = "luciernaga";
+      s.setAttribute("aria-hidden", "true");
+      s.style.left = 5 + Math.random() * 90 + "%";
+      s.style.top = 8 + Math.random() * 75 + "%";
+      s.style.animationDuration = 7 + Math.random() * 7 + "s, " + (2 + Math.random() * 3).toFixed(1) + "s";
+      s.style.animationDelay = -Math.random() * 8 + "s, " + -Math.random() * 3 + "s";
+      padre.appendChild(s);
+    }
+  }
+
+  $$(".enredadera").forEach(crearEnredadera);
+
   function lanzarPetalos() {
     if (reducirMovimiento) return;
     var cont = $("#petalos");

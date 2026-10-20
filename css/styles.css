@@ -2,6 +2,10 @@
    PALETAS (cambia en js/config.js -> tema)
    ============================================================ */
 :root {
+  --vina-1: var(--accent);
+  --vina-2: var(--accent);
+  --vina-3: var(--accent);
+  --luz: var(--metal-2);
   --sobre: var(--primary);
   --petalo: var(--primary);
   --f-label: "Montserrat", sans-serif;
@@ -23,6 +27,10 @@
   --metal-3: #C48A7E;
   --linea: #DCDFC9;
   --sobre: #C4D1B8;
+  --vina-1: #5F6F30;
+  --vina-2: #8C9C55;
+  --vina-3: #B3C189;
+  --luz: #F0CF6E;
   --sello-1: #F4E6B8;
   --sello-2: #A9873C;
   --petalo: #E3B5B3;
@@ -46,6 +54,10 @@
   --metal-3: #6E7A3A;
   --linea: #CFC3A6;
   --sobre: #C4A57C;
+  --vina-1: #55622C;
+  --vina-2: #7F8E48;
+  --vina-3: #A9B67A;
+  --luz: #EFC762;
   --petalo: #D9A3A0;
   --f-label: "Amatic SC", "Montserrat", sans-serif;
 }
@@ -482,4 +494,47 @@ main { max-width: 760px; margin: 0 auto; }
 [data-theme="rural"] .sobre__sello {
   background: radial-gradient(circle at 35% 30%, #EBC0BC, #B9716C 72%);
   border-radius: 46% 54% 50% 50% / 52% 48% 52% 48%;
+}
+
+/* ============================================================
+   RAMAS COLGANTES Y LUCIÉRNAGAS
+   ============================================================ */
+.enredadera {
+  position: absolute; left: 0; right: 0; top: 0; height: 62%;
+  pointer-events: none; overflow: hidden; z-index: 0;
+}
+.portada .enredadera { left: 50%; right: auto; width: 100vw; margin-left: -50vw; }
+.follaje { position: absolute; top: -6px; left: 0; z-index: 1; }
+@media (max-width: 600px) {
+  .portada .enredadera { height: 44%; }
+  .intro .enredadera { height: 48%; }
+}
+.intro > *:not(.enredadera):not(.luciernaga),
+.portada > *:not(.enredadera):not(.luciernaga):not(.bajar) { position: relative; z-index: 1; }
+.vina {
+  position: absolute; top: -4px; width: 44px; margin-left: -22px;
+  transform-origin: 50% 0;
+  animation: mecer 7s ease-in-out infinite alternate;
+}
+.vina svg { overflow: visible; }
+.vina .tallo { fill: none; stroke: var(--vina-1); stroke-width: 1.1; opacity: .8; }
+.enredadera .h1 { fill: var(--vina-1); }
+.enredadera .h2 { fill: var(--vina-2); }
+.enredadera .h3 { fill: var(--vina-3); }
+.vina .luz { fill: var(--luz); animation: titilar 3.2s ease-in-out infinite; }
+.vina .halo { opacity: .28; }
+@keyframes mecer { from { transform: rotate(-1.8deg); } to { transform: rotate(1.8deg); } }
+@keyframes titilar { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+
+.luciernaga {
+  position: absolute; z-index: 0; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--luz); box-shadow: 0 0 8px 3px color-mix(in srgb, var(--luz) 55%, transparent);
+  pointer-events: none;
+  animation: volar 10s ease-in-out infinite alternate, titilar 3s ease-in-out infinite;
+}
+@keyframes volar {
+  0%   { transform: translate(0, 0); }
+  33%  { transform: translate(18px, -22px); }
+  66%  { transform: translate(-14px, -8px); }
+  100% { transform: translate(10px, 16px); }
 }

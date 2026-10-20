@@ -52,7 +52,7 @@ window.INVITACION = {
   },
 
   rsvp: {
-    fechaLimite: "2 de enero de 2027",
+    fechaLimite: "Viernes 4 de diciembre de 2026",
     // Máximo de personas por confirmación (si el enlace no trae ?pases=N)
     maxPersonas: 6,
     // Pega aquí la URL de tu aplicación web de Google Apps Script (ver README).
