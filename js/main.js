@@ -178,10 +178,11 @@
     var cont = $("#petalos");
     for (var i = 0; i < 14; i++) {
       var p = document.createElement("span");
-      var tam = 8 + Math.random() * 8;
-      p.className = "petalo";
+      var tam = 11 + Math.random() * 7;
+      p.className = "petalo h" + (1 + Math.floor(Math.random() * 3));
       p.style.left = Math.random() * 100 + "%";
-      p.style.width = p.style.height = tam + "px";
+      p.style.width = (tam * 0.42).toFixed(1) + "px";
+      p.style.height = tam.toFixed(1) + "px";
       p.style.animationDuration = 9 + Math.random() * 8 + "s";
       p.style.animationDelay = Math.random() * 8 + "s";
       cont.appendChild(p);

@@ -275,11 +275,13 @@ h1, h2, h3, p { margin: 0; }
 /* ============================================================
    PÉTALOS
    ============================================================ */
+.petalo.h1 { background: var(--vina-1); }
+.petalo.h3 { background: var(--vina-3); }
 .petalos { position: fixed; inset: 0; pointer-events: none; z-index: 40; overflow: hidden; }
 .petalo {
   position: absolute; top: -20px; width: 12px; height: 12px;
-  background: var(--petalo); opacity: .55;
-  border-radius: 150% 0 150% 0;
+  background: var(--vina-2); opacity: .8;
+  border-radius: 50%;
   animation: caer linear infinite;
 }
 @keyframes caer {
