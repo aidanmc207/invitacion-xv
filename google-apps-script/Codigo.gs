@@ -28,8 +28,8 @@ function configurar() {
       ['Resumen', ''],
       ['Personas confirmadas', `=COUNTA('${HOJA_LISTA}'!C2:C)`],
       ['Respuestas recibidas', `=COUNTA('${HOJA_RESPUESTAS}'!A2:A)`],
-      ['Respuestas "Sí"', `=COUNTIF('${HOJA_RESPUESTAS}'!C2:C,"Sí")`],
-      ['Respuestas "No"', `=COUNTIF('${HOJA_RESPUESTAS}'!C2:C,"No")`],
+      ['Respuestas "Sí"', `=SUMPRODUCT('${HOJA_RESPUESTAS}'!C2:C="Sí")`],
+      ['Respuestas "No"', `=SUMPRODUCT('${HOJA_RESPUESTAS}'!C2:C="No")`],
     ]);
     resumen.getRange('A1').setFontWeight('bold').setFontSize(14);
     resumen.getRange('A2:A5').setFontWeight('bold');
