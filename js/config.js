@@ -57,7 +57,7 @@ window.INVITACION = {
     maxPersonas: 6,
     // Pega aquí la URL de tu aplicación web de Google Apps Script (ver README).
     // Mientras esté vacía, el formulario funciona en "modo demostración" y no guarda nada.
-    urlGoogleScript: "",
+    urlGoogleScript: "https://script.google.com/macros/s/AKfycbx-fGlsQx9mclwjSGDWIDmmsC5vII0DbjRM1rzLP1JgjBY0p3s8Y45lztIUXjgYsswQ/exec",
   },
 
   // Opcional: URL de un archivo .mp3 (por ejemplo "musica/cancion.mp3"). Vacío = sin música.
