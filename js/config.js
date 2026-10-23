@@ -5,9 +5,8 @@
  * ============================================================
  */
 window.INVITACION = {
-  // Nombre corto (portada grande, sobre y despedida) y nombre completo (debajo, en la portada)
+  // Nombre corto (portada grande, sobre y despedida)
   nombre: "Evangelyn",
-  nombreCompleto: "Evangelyn Yariana Blanco Rodríguez",
 
   // Fecha y hora del evento principal (formato AAAA-MM-DDTHH:MM:SS, hora local)
   fecha: "2027-01-16T15:00:00",
