@@ -66,7 +66,7 @@ Todo en `js/config.js`:
 - `nombre`, `fecha`, `fechaTexto`, `frase`, `padres`, `padrinos`
 - `ceremonia` y `recepcion` (hora, lugar, dirección y enlace de Google Maps)
 - `vestimenta`, `regalos`, `rsvp.fechaLimite`, `rsvp.maxPersonas`
-- `musica`: sube un `.mp3` al repositorio (por ejemplo `musica/cancion.mp3`) y escribe su ruta; suena al abrir el sobre.
+- `musica`: lista de canciones que suenan **en orden aleatorio** al abrir el sobre (al terminar una sigue otra). Cada una puede ser un `.mp3` subido al repositorio (`musica/cancion.mp3`) o un enlace de YouTube (`https://youtu.be/…`; agrega `&t=30` para empezar en el segundo 30). Con YouTube pueden salir anuncios antes de la canción y algunos videos no permiten reproducirse fuera de YouTube (se saltan solos); los `.mp3` son lo más confiable.
 
 ### Paletas disponibles (`tema`)
 

@@ -64,26 +64,135 @@
     eventos.appendChild(art);
   });
 
-  // ---------- Sobre de apertura + pétalos + música ----------
-  var audio = null;
+  // ---------- Música: una o varias canciones (mp3 o YouTube) en orden aleatorio ----------
   var btnMusica = $("#musica");
-  if (C.musica) {
-    audio = new Audio(C.musica);
-    audio.loop = true;
-    btnMusica.addEventListener("click", function () {
-      if (audio.paused) audio.play(); else audio.pause();
-    });
-    audio.addEventListener("play", function () { btnMusica.classList.remove("pausada"); btnMusica.setAttribute("aria-label", "Pausar música"); });
-    audio.addEventListener("pause", function () { btnMusica.classList.add("pausada"); btnMusica.setAttribute("aria-label", "Reproducir música"); });
+  var listaMusica = [].concat(C.musica || []).filter(Boolean);
+  var reproductor = listaMusica.length ? crearReproductor(listaMusica) : null;
+
+  function idYouTube(url) {
+    var m = String(url).match(/(?:youtu\.be\/|[?&]v=|\/(?:embed|shorts|live)\/)([\w-]{11})/);
+    return m ? m[1] : null;
+  }
+  function inicioYouTube(url) {
+    var m = String(url).match(/[?&](?:t|start)=(\d+)/);
+    return m ? parseInt(m[1], 10) : 0;
+  }
+  function barajar(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+    }
+    return arr;
+  }
+  function marcarMusica(sonando) {
+    btnMusica.classList.toggle("pausada", !sonando);
+    btnMusica.setAttribute("aria-label", sonando ? "Pausar música" : "Reproducir música");
   }
 
+  function crearReproductor(lista) {
+    var cola = [], pos = -1, actual = null, errores = 0;
+    var audio = new Audio();
+    audio.preload = "auto";
+    var yt = null, ytListo = false;
+
+    // Siguiente canción de la cola; al terminarla se vuelve a barajar sin repetir la última.
+    function tomarSiguiente() {
+      pos++;
+      if (pos >= cola.length) {
+        var ultima = cola[cola.length - 1];
+        cola = barajar(lista.slice());
+        if (cola.length > 1 && cola[0] === ultima) cola.push(cola.shift());
+        pos = 0;
+      }
+      return cola[pos];
+    }
+
+    function cargar(url, sonar) {
+      actual = url;
+      var id = idYouTube(url);
+      if (id) {
+        audio.pause();
+        if (!ytListo) return;
+        var datos = { videoId: id, startSeconds: inicioYouTube(url) };
+        if (sonar) yt.loadVideoById(datos); else yt.cueVideoById(datos);
+      } else {
+        if (ytListo) yt.stopVideo();
+        audio.src = url;
+        if (sonar) audio.play().catch(function () { marcarMusica(false); });
+      }
+    }
+
+    function siguiente() {
+      if (++errores > lista.length) return marcarMusica(false); // ninguna canción funciona
+      cargar(tomarSiguiente(), true);
+    }
+
+    audio.addEventListener("play", function () { errores = 0; marcarMusica(true); });
+    audio.addEventListener("pause", function () { marcarMusica(false); });
+    audio.addEventListener("ended", siguiente);
+    audio.addEventListener("error", function () { if (audio.getAttribute("src")) siguiente(); });
+
+    if (lista.some(idYouTube)) {
+      var cont = document.createElement("div");
+      cont.className = "musica-yt";
+      cont.innerHTML = '<div id="musica-yt"></div>';
+      document.body.appendChild(cont);
+      window.onYouTubeIframeAPIReady = function () {
+        yt = new YT.Player("musica-yt", {
+          width: 200, height: 200,
+          playerVars: { playsinline: 1, controls: 0, disablekb: 1, rel: 0 },
+          events: {
+            onReady: function () {
+              ytListo = true;
+              // Si ya abrieron el sobre mientras cargaba, intenta sonar de una vez.
+              if (idYouTube(actual)) cargar(actual, reproductor.quiereSonar);
+            },
+            onStateChange: function (e) {
+              if (e.data === YT.PlayerState.PLAYING) { errores = 0; marcarMusica(true); }
+              else if (e.data === YT.PlayerState.PAUSED) marcarMusica(false);
+              else if (e.data === YT.PlayerState.ENDED) siguiente();
+            },
+            onError: siguiente, // video eliminado o que no permite insertarse
+          },
+        });
+      };
+      var s = document.createElement("script");
+      s.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(s);
+    }
+
+    cargar(tomarSiguiente(), false);
+
+    return {
+      quiereSonar: false,
+      reproducir: function () {
+        this.quiereSonar = true;
+        if (!idYouTube(actual)) audio.play().catch(function () { marcarMusica(false); });
+        else if (ytListo) yt.playVideo();
+      },
+      pausar: function () {
+        this.quiereSonar = false;
+        audio.pause();
+        if (ytListo) yt.pauseVideo();
+      },
+    };
+  }
+
+  if (reproductor) {
+    marcarMusica(false);
+    btnMusica.addEventListener("click", function () {
+      if (btnMusica.classList.contains("pausada")) reproductor.reproducir(); else reproductor.pausar();
+    });
+  }
+
+  // ---------- Sobre de apertura + pétalos ----------
   $("#abrir").addEventListener("click", function () {
     var sobre = this;
     if (sobre.classList.contains("abierto")) return;
     sobre.classList.add("abierto");
-    if (audio) {
+    if (reproductor) {
       btnMusica.hidden = false;
-      audio.play().catch(function () { btnMusica.classList.add("pausada"); });
+      reproductor.reproducir();
     }
     setTimeout(function () {
       $("#intro").classList.add("oculto");

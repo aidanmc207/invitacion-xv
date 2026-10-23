@@ -59,6 +59,15 @@ window.INVITACION = {
     urlGoogleScript: "https://script.google.com/macros/s/AKfycbx-fGlsQx9mclwjSGDWIDmmsC5vII0DbjRM1rzLP1JgjBY0p3s8Y45lztIUXjgYsswQ/exec",
   },
 
-  // Opcional: URL de un archivo .mp3 (por ejemplo "musica/cancion.mp3"). Vacío = sin música.
-  musica: "",
+  // Música de fondo: una lista de canciones que suenan en orden aleatorio al abrir el sobre.
+  // Cada una puede ser un archivo .mp3 subido al repositorio ("musica/cancion.mp3")
+  // o un enlace de YouTube ("https://youtu.be/XXXXXXXXXXX"). Agrega &t=30 al enlace
+  // de YouTube para que empiece en el segundo 30. Lista vacía [] = sin música.
+  musica: [
+    "musica/fix-you.mp3",
+    "musica/catch-me.mp3",
+    "musica/losing-someone.mp3",
+    "musica/the-climb.mp3",
+    "musica/leshan-buddha.mp3",
+  ],
 };

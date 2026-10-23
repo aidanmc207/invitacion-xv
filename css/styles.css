@@ -540,3 +540,9 @@ main { max-width: 760px; margin: 0 auto; }
   66%  { transform: translate(-14px, -8px); }
   100% { transform: translate(10px, 16px); }
 }
+
+/* Reproductor de YouTube para la música de fondo (no se ve ni se toca) */
+.musica-yt {
+  position: fixed; left: 0; bottom: 0; width: 200px; height: 200px;
+  opacity: 0; pointer-events: none; z-index: -1; overflow: hidden;
+}
