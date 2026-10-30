@@ -361,6 +361,46 @@ main { max-width: 760px; margin: 0 auto; }
 .muestras span:nth-child(2) { background: var(--accent); }
 .muestras span:nth-child(3) { background: linear-gradient(135deg, var(--metal-1), var(--metal-2)); }
 
+/* Momentos: galería de fotos */
+.galeria { display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; width: 100%; margin-top: 1rem; }
+.galeria__foto {
+  position: relative; aspect-ratio: 4 / 5; padding: 0; border: 0; border-radius: 16px; overflow: hidden;
+  background: var(--suave); cursor: zoom-in;
+  box-shadow: 0 0 0 1px var(--linea), 0 8px 20px rgba(0,0,0,.08);
+}
+.galeria__foto:first-child { grid-column: span 2; aspect-ratio: 8 / 5; }
+.galeria__foto img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+.galeria__foto:hover img { transform: scale(1.04); }
+.galeria__foto:focus-visible { outline: 2px solid var(--btn); outline-offset: 3px; }
+
+/* Visor de fotos ampliadas */
+body.con-visor { overflow: hidden; }
+.visor {
+  width: 100vw; height: 100vh; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0;
+  background: transparent; color: #fff;
+}
+.visor[open] { display: flex; align-items: center; justify-content: center; animation: entrar .3s ease both; }
+.visor::backdrop { background: rgba(20, 22, 14, .92); }
+.visor img { max-width: calc(100vw - 32px); max-height: calc(100dvh - 120px); border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,.4); }
+.visor__btn {
+  position: absolute; width: 48px; height: 48px; border-radius: 50%; border: 0; cursor: pointer;
+  background: rgba(255,255,255,.14); color: #fff; font-size: 2rem; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+}
+.visor__btn:hover { background: rgba(255,255,255,.26); }
+.visor__btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.visor__cerrar { top: 16px; right: 16px; }
+.visor__ant, .visor__sig { top: 50%; margin-top: -24px; }
+.visor__ant { left: 16px; }
+.visor__sig { right: 16px; }
+.visor__cuenta {
+  position: absolute; bottom: 20px; left: 0; right: 0;
+  font-family: "Montserrat", sans-serif; font-size: .8rem; letter-spacing: .2em; opacity: .8;
+}
+@media (max-width: 640px) {
+  .visor__ant, .visor__sig { top: auto; bottom: 8px; margin-top: 0; }
+}
+
 /* Botones */
 .boton {
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
@@ -445,6 +485,7 @@ main { max-width: 760px; margin: 0 auto; }
 
 @media (min-width: 640px) {
   .tarjetas, .dos-col { grid-template-columns: 1fr 1fr; }
+  .galeria { grid-template-columns: repeat(3, 1fr); gap: .8rem; }
   .formulario, .exito { padding: 2.2rem 2rem; }
 }
 @media (max-width: 380px) {

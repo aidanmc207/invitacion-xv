@@ -12,8 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Amatic+SC:wght@700&family=Great+Vibes&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=11">
-  <script src="js/config.js?v=11"></script>
+  <link rel="stylesheet" href="css/styles.css?v=12">
+  <script src="js/config.js?v=12"></script>
 </head>
 <body class="bloqueado">
 
@@ -126,6 +126,13 @@
       </div>
     </section>
 
+    <!-- Momentos (galería de fotos) -->
+    <section class="seccion" id="momentos">
+      <p class="etiqueta revelar">Mi historia</p>
+      <h2 class="titulo-script metal revelar">Momentos</h2>
+      <div class="galeria" id="galeria"></div>
+    </section>
+
     <!-- Evento -->
     <section class="seccion">
       <p class="etiqueta revelar">Dónde y cuándo</p>
@@ -210,10 +217,19 @@
     </footer>
   </main>
 
+  <!-- Visor de fotos -->
+  <dialog class="visor" id="visor" aria-label="Foto ampliada">
+    <img id="visor-img" alt="">
+    <button type="button" class="visor__btn visor__cerrar" id="visor-cerrar" aria-label="Cerrar">&times;</button>
+    <button type="button" class="visor__btn visor__ant" id="visor-ant" aria-label="Foto anterior">&lsaquo;</button>
+    <button type="button" class="visor__btn visor__sig" id="visor-sig" aria-label="Foto siguiente">&rsaquo;</button>
+    <p class="visor__cuenta" id="visor-cuenta"></p>
+  </dialog>
+
   <button class="musica" id="musica" type="button" aria-label="Pausar música" hidden>
     <span></span><span></span><span></span>
   </button>
 
-  <script src="js/main.js?v=11"></script>
+  <script src="js/main.js?v=12"></script>
 </body>
 </html>

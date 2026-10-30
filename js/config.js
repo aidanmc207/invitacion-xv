@@ -70,4 +70,20 @@ window.INVITACION = {
     "musica/the-climb.mp3",
     "musica/leshan-buddha.mp3",
   ],
+
+  // Fotos de la sección "Momentos", en el orden en que se muestran (la primera sale destacada).
+  // Súbelas a la carpeta fotos/ y escribe aquí su ruta. Lista vacía [] = sin sección.
+  fotos: [
+    "fotos/momento-01.jpg",
+    "fotos/momento-02.jpg",
+    "fotos/momento-03.jpg",
+    "fotos/momento-04.jpg",
+    "fotos/momento-05.jpg",
+    "fotos/momento-06.jpg",
+    "fotos/momento-07.jpg",
+    "fotos/momento-08.jpg",
+    "fotos/momento-09.jpg",
+    "fotos/momento-10.jpg",
+    "fotos/momento-11.jpg",
+  ],
 };

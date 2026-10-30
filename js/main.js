@@ -64,6 +64,59 @@
     eventos.appendChild(art);
   });
 
+  // ---------- Momentos: galería de fotos con visor ----------
+  var fotos = [].concat(C.fotos || []).filter(Boolean);
+  var galeria = $("#galeria");
+  if (!fotos.length) $("#momentos").hidden = true;
+  fotos.forEach(function (src, i) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "galeria__foto revelar";
+    b.style.transitionDelay = (i % 3) * 0.12 + "s";
+    b.setAttribute("aria-label", "Ver foto " + (i + 1) + " de " + fotos.length);
+    b.innerHTML = '<img loading="lazy" decoding="async" alt="">';
+    b.querySelector("img").src = src;
+    b.addEventListener("click", function () { abrirVisor(i); });
+    galeria.appendChild(b);
+  });
+
+  var visor = $("#visor");
+  var visorImg = $("#visor-img");
+  var fotoActual = 0;
+  function mostrarFoto(i) {
+    fotoActual = (i + fotos.length) % fotos.length;
+    visorImg.src = fotos[fotoActual];
+    visorImg.alt = "Foto " + (fotoActual + 1) + " de " + fotos.length;
+    $("#visor-cuenta").textContent = (fotoActual + 1) + " / " + fotos.length;
+  }
+  function abrirVisor(i) {
+    mostrarFoto(i);
+    if (visor.showModal) visor.showModal(); else visor.setAttribute("open", "");
+    document.body.classList.add("con-visor");
+  }
+  function cerrarVisor() {
+    if (visor.close) visor.close(); else visor.removeAttribute("open");
+  }
+  visor.addEventListener("close", function () { document.body.classList.remove("con-visor"); });
+  $("#visor-cerrar").addEventListener("click", cerrarVisor);
+  $("#visor-ant").addEventListener("click", function () { mostrarFoto(fotoActual - 1); });
+  $("#visor-sig").addEventListener("click", function () { mostrarFoto(fotoActual + 1); });
+  // Tocar fuera de la foto cierra el visor
+  visor.addEventListener("click", function (e) { if (e.target === visor) cerrarVisor(); });
+  visor.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") mostrarFoto(fotoActual - 1);
+    else if (e.key === "ArrowRight") mostrarFoto(fotoActual + 1);
+  });
+  // Deslizar con el dedo para cambiar de foto
+  var toqueX = null;
+  visor.addEventListener("touchstart", function (e) { toqueX = e.touches[0].clientX; }, { passive: true });
+  visor.addEventListener("touchend", function (e) {
+    if (toqueX == null) return;
+    var dx = e.changedTouches[0].clientX - toqueX;
+    toqueX = null;
+    if (Math.abs(dx) > 45) mostrarFoto(fotoActual + (dx < 0 ? 1 : -1));
+  });
+
   // ---------- Música: una o varias canciones (mp3 o YouTube) en orden aleatorio ----------
   var btnMusica = $("#musica");
   var listaMusica = [].concat(C.musica || []).filter(Boolean);

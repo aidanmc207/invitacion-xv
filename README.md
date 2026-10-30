@@ -67,6 +67,7 @@ Todo en `js/config.js`:
 - `ceremonia` y `recepcion` (hora, lugar, dirección y enlace de Google Maps)
 - `vestimenta`, `regalos`, `rsvp.fechaLimite`, `rsvp.maxPersonas`
 - `musica`: lista de canciones que suenan **en orden aleatorio** al abrir el sobre (al terminar una sigue otra). Cada una puede ser un `.mp3` subido al repositorio (`musica/cancion.mp3`) o un enlace de YouTube (`https://youtu.be/…`; agrega `&t=30` para empezar en el segundo 30). Con YouTube pueden salir anuncios antes de la canción y algunos videos no permiten reproducirse fuera de YouTube (se saltan solos); los `.mp3` son lo más confiable.
+- `fotos`: lista de fotos de la sección **Momentos**, en el orden en que se muestran (la primera sale más grande). Súbelas a la carpeta `fotos/` (de preferencia `.jpg` de no más de ~1400 px por lado para que carguen rápido) y escribe su ruta, por ejemplo `"fotos/momento-01.jpg"`. Al tocar una foto se abre en grande y se puede pasar a la siguiente con las flechas o deslizando el dedo. Lista vacía `[]` = la sección no aparece.
 
 ### Paletas disponibles (`tema`)
 
